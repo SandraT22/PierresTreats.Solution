@@ -5,7 +5,7 @@ using System.IO;
 
 namespace PierresTreat.Models
 {
-  public class PierresTreatContextFactory : IDesignTimeDbContextFactory<ToDoListContext>
+  public class PierresTreatContextFactory : IDesignTimeDbContextFactory<PierresTreatContext>
   {
 
     PierresTreatContext IDesignTimeDbContextFactory<PierresTreatContext>.CreateDbContext(string[] args)

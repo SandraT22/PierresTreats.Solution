@@ -4,7 +4,14 @@
 
 @model PierresTreat.Models.Treat
 
-<h4>Add a new treat</h4>
+<h4>Add new treat</h4>
 
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  <input type="submit" value="Add new book" class="btn btn-primary" />
+}
 
 <p>@Html.ActionLink("Show all treats", "Index")</p>

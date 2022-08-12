@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PierresTreat.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Flavorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
@@ -66,7 +66,7 @@ namespace PierresTreat.Controllers
           .ThenInclude(join => join.Flavor)
           .FirstOrDefault(treat => treat.TreatId == id);
       // var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-      ViewBag.Copies = _db.Copies.Where(copy => copy.TreatId == id);
+      // ViewBag.Copies = _db.Copies.Where(copy => copy.TreatId == id);
       return View(thisTreat);
     }
 

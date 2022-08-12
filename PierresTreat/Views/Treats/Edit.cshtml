@@ -6,8 +6,17 @@
 
 <h2>Edit</h2>
 
-<h4>Edit this treat: @Html.DisplayFor(model => model.Description)</h4>
+<h4>Edit this treat: @Html.DisplayFor(model => model.Namne)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TreatId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
 
 
-
-<p>@Html.ActionLink("Back to treats", "Index")</p>
+  <input type="submit" value="Save" />
+}
+<hr />
+<p>@Html.ActionLink("Back to list", "Index")</p>
