@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ProjectName.Models.Item
+
+<h2>Item Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
+
+
+
+<p>@Html.ActionLink("Add a ", "AddCategory", new { id = Model.Id })</p>
+
+<p>@Html.ActionLink("Back to ", "Index")</p>
+<p>@Html.ActionLink("Edit ", "Edit", new { id = Model.Id })</p>
+<p>@Html.ActionLink("Delete ", "Delete", new { id = Model.Id })</p>
