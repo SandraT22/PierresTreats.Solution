@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 
+@using PierresTreat.Models
 @model PierresTreat.Models.Flavor;
 
 <h2>Flavor Details</h2>
@@ -32,5 +33,5 @@ else
 }
 
 <p>@Html.ActionLink("Back to flavors", "Index")</p>
-<p>@Html.ActionLink("Edit flavors", "Edit", new { id = Model.Id })</p>
-<p>@Html.ActionLink("Delete flavors", "Delete", new { id = Model.Id })</p>
+<p>@Html.ActionLink("Edit flavors", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete flavors", "Delete", new { id = Model.FlavorId })</p>

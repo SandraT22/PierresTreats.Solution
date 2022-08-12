@@ -7,11 +7,11 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-  <h1>Books added by @User.Identity.Name</h1>
-  @if (Model.userTreats.Any())
+  <h1>Treats added by @User.Identity.Name</h1>
+  @if (Model.Any())
   {
       <ul>
-      @foreach (Treat treat in Model.userBooks)
+      @foreach (Treat treat in Model)
       {
         <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</li>
       }
@@ -27,12 +27,12 @@ else
   <h1>All the treats in the system.</h1>
 }
 
-@if (Model.treats.Any())
+@if (Model.Any())
 {
   <hr />
   <h3>Treats added by others.</h3>
   <ul>
-    @foreach (Treat treat in Model.books)
+    @foreach (Treat treat in Model)
     {
       <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</li>
     }
