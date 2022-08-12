@@ -1,6 +1,6 @@
-namespace ProjectName.Models
+namespace PierresTreat.Models
 {
-  public class CategoryItem
+  public class FlavorTreat
   {       
     
   }

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-namespace ProjectName.Models
+namespace PierresTreat.Models
 {
-  public class Item
+  public class Treat
   {
-    public Item()
+    public Treat()
     {
      
     }
