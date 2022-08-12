@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using PierresTreat.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Flavorization;
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace PierresTreat.Controllers
 {
-  [Flavorize(Roles = "Librarian")]
-  [Flavorize(Roles = "Admin")]
+  [Authorize(Roles = "Librarian")]
+  [Authorize(Roles = "Admin")]
   public class AdministrationController : Controller
   {
     private readonly RoleManager<IdentityRole> _roleManager;
