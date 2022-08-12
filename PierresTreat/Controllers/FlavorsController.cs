@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using Library.Models;
+using PierresTreat.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Flavorization;
@@ -50,16 +50,16 @@ namespace PierresTreat.Controllers
       Flavor flavor = _db.Flavors.FirstOrDefault(a => a.FlavorId == id);
       ViewBag.PageTitle = $"Flavor {flavor.Name}";
 
-      ViewBag.BookId = new SelectList(_db.Books, "BookId", "Title");
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Title");
       return View(flavor);
     }
 
     [HttpPost]
-    public ActionResult Details(FlavorBook ab)
+    public ActionResult Details(FlavorTreat ab)
     {
-      if (_db.FlavorBook.FirstOrDefault(a => a.FlavorId == ab.FlavorId && a.BookId == ab.BookId) == null)
+      if (_db.FlavorTreat.FirstOrDefault(a => a.FlavorId == ab.FlavorId && a.TreatId == ab.TreatId) == null)
       {
-        _db.FlavorBook.Add(ab);
+        _db.FlavorTreat.Add(ab);
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = ab.FlavorId });
@@ -97,12 +97,12 @@ namespace PierresTreat.Controllers
     }
 
     [HttpPost]
-    public ActionResult DeleteFlavor(int flavorBookId)
+    public ActionResult DeleteFlavor(int flavorTreatId)
     {
-      var ab = _db.FlavorBook.FirstOrDefault(a => a.FlavorBookId == flavorBookId);
+      var ab = _db.FlavorTreat.FirstOrDefault(a => a.FlavorTreatId == flavorTreatId);
       if (ab != null)
       {
-        _db.FlavorBook.Remove(ab);
+        _db.FlavorTreat.Remove(ab);
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = ab.FlavorId });

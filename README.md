@@ -70,7 +70,7 @@ Download MySQL Workbench, follow the setup wizard & create a localhost server on
 
 <pre>{
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=fan_book;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
+    "DefaultConnection": "Server=localhost;Port=3306;database=fan_treat;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
   }
 }</pre>
 <small>*Note: you must include your password in the code block section labeled "YOUR-PASSWORD-HERE".</small><br>
