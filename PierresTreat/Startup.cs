@@ -40,7 +40,7 @@ namespace PierresTreat
       app.UseDeveloperExceptionPage();
       app.UseRouting();
 
-      app.UseAuthorization();
+      app.UseFlavorization();
 
       app.UseEndpoints(routes =>
       {
