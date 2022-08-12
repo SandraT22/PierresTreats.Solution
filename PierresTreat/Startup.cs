@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-using ProjectName.Models;
+using PierresTreat.Models;
 
-namespace ProjectName
+namespace PierresTreat
 {
   public class Startup
   {
@@ -27,7 +27,7 @@ namespace ProjectName
       services.AddMvc();
 
       services.AddEntityFrameworkMySql()
-        .AddDbContext<PlanetaryTravelAgencyContext>(options => options
+        .AddDbContext<PierresTreatContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
     }
 
