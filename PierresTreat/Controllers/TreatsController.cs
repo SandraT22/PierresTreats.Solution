@@ -11,6 +11,7 @@ using System.Security.Claims;
 
 namespace PierresTreat.Controllers
 {
+   [Authorize(Roles = "Baker, Customer")]
   public class TreatsController : Controller
   {
     private readonly PierresTreatContext _db;
@@ -22,6 +23,7 @@ namespace PierresTreat.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     public async Task<ActionResult> Index()
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -37,12 +39,14 @@ namespace PierresTreat.Controllers
       return View((treats, emptyList));
     }
 
+    [Authorize(Roles = "Baker")]
     public ActionResult Create()
     {
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View();
     }
 
+    [Authorize(Roles = "Baker")]
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat, int FlavorId)
     {
@@ -59,6 +63,7 @@ namespace PierresTreat.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "Baker, Customer")]
     public ActionResult Details(int id)
     {
       var thisTreat = _db.Treats
@@ -70,6 +75,7 @@ namespace PierresTreat.Controllers
       return View(thisTreat);
     }
 
+    [Authorize(Roles = "Baker")]
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -77,6 +83,7 @@ namespace PierresTreat.Controllers
       return View(thisTreat);
     }
 
+    [Authorize(Roles = "Baker")]
     [HttpPost]
     public ActionResult Edit(Treat treat, int FlavorId)
     {
@@ -89,6 +96,7 @@ namespace PierresTreat.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "Baker")]
     public ActionResult AddFlavor(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
@@ -96,6 +104,7 @@ namespace PierresTreat.Controllers
       return View(thisTreat);
     }
 
+    [Authorize(Roles = "Baker")]
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
@@ -107,12 +116,14 @@ namespace PierresTreat.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "Baker")]
     public ActionResult Delete(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
       return View(thisTreat);
     }
 
+    [Authorize(Roles = "Baker")]
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
@@ -122,6 +133,7 @@ namespace PierresTreat.Controllers
       return RedirectToAction("Index");
     }
 
+     [Authorize(Roles = "Baker")]
     [HttpPost]
     public ActionResult DeleteFlavor(int joinId)
     {

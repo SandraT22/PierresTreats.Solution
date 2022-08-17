@@ -1,9 +1,37 @@
- @{ 
+@{
   Layout = "_Layout";
 }
-<h1>Welcome to Pierre's Sweet and Savory Treats!</h1>
+@using System.Security.Claims
+@model IEnumerable<PierresTreat.Models.Treat>
 
-<!-- <p>Tag Line Goes Here</p> -->
+<h1>Welcome to Pierre's Sweet & Savory Treats!</h1>
 
-<p>@Html.ActionLink("See all treats!", "Index", "Treats")</p> 
-<p>@Html.ActionLink("See all flavors", "Index", "Flavors")</p>
+<hr />
+@using (@Html.BeginForm())
+{
+  <div class="mb-3">
+    <input type="text" name="SearchString" placeholder="Search for treats or flavors" />
+    <input type="submit" value="Search" />
+  </div>
+}
+@if (Model.Any())
+{
+  <p>There are treats that match</p>
+}
+
+<div>
+  <p>@Html.ActionLink("View treats", "Index", "Treats")</p>
+  <p>@Html.ActionLink("View flavors", "Index", "Flavors")</p>
+  @if (User.Identity.IsAuthenticated)
+  {
+    @if (User.IsInRole("Baker") && User.IsInRole("Admin"))
+    {
+      <p>@Html.ActionLink("Admin Portal", "ListRoles", "Administration")</p>
+    }
+    <p>@Html.ActionLink("Log out", "Index", "Account")</p>
+  }
+  else
+  {
+    <p>@Html.ActionLink("Create an account", "Index", "Account")</p>
+  }
+</div>
