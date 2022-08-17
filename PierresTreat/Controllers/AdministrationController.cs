@@ -10,8 +10,8 @@ using System.Security.Claims;
 
 namespace PierresTreat.Controllers
 {
-  [Authorize(Roles = "Librarian")]
-  [Authorize(Roles = "Admin")]
+  [Authorize(Roles = "Baker")]
+  [Authorize(Roles = "Customer")]
   public class AdministrationController : Controller
   {
     private readonly RoleManager<IdentityRole> _roleManager;

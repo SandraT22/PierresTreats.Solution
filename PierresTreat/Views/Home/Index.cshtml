@@ -7,17 +7,6 @@
 <h1>Welcome to Pierre's Sweet & Savory Treats!</h1>
 
 <hr />
-@using (@Html.BeginForm())
-{
-  <div class="mb-3">
-    <input type="text" name="SearchString" placeholder="Search for treats or flavors" />
-    <input type="submit" value="Search" />
-  </div>
-}
-@if (Model.Any())
-{
-  <p>There are treats that match</p>
-}
 
 <div>
   <p>@Html.ActionLink("View treats", "Index", "Treats")</p>
