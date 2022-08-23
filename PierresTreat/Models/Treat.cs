@@ -13,6 +13,6 @@ namespace PierresTreat.Models
     public string Name { get; set; }
     public virtual ApplicationUser User { get; set; }
 
-    public virtual ICollection<FlavorTreat> JoinEntities { get; }
+    public virtual ICollection<FlavorTreat> JoinEntities { get;}
   }
 }

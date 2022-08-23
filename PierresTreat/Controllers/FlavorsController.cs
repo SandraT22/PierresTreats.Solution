@@ -11,72 +11,50 @@ using System.Security.Claims;
 
 namespace PierresTreat.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly PierresTreatContext _db;
-    private readonly UserManager<ApplicationUser> _userManager;
 
-    public FlavorsController(UserManager<ApplicationUser> userManager, PierresTreatContext db)
+    public FlavorsController(PierresTreatContext db)
     {
-      _userManager = userManager;
       _db = db;
     }
-
+    [AllowAnonymous]
     public ActionResult Index()
     {
-      ViewBag.PageTitle = "View All Flavors";
-      return View(_db.Flavors.ToList());
+      List<Flavor> model = _db.Flavors.ToList();
+      return View(model);
     }
 
-    [Authorize(Roles = "Baker")]
     public ActionResult Create()
     {
-      ViewBag.PageTitle = "Add New Flavor";
       return View();
     }
 
-    [Authorize(Roles = "Baker")]
     [HttpPost]
     public ActionResult Create(Flavor flavor)
     {
-      if (_db.Flavors.FirstOrDefault(a => a.Name == flavor.Name) == null)
-      {
-        _db.Flavors.Add(flavor);
-        _db.SaveChanges();
-      }
+      _db.Flavors.Add(flavor);
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
-      Flavor flavor = _db.Flavors.FirstOrDefault(a => a.FlavorId == id);
-      ViewBag.PageTitle = $"Flavor {flavor.Name}";
-
-      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Title");
-      return View(flavor);
+      var thisFlavor = _db.Flavors
+          .Include(flavor => flavor.JoinEntities)
+          .ThenInclude(join => join.Treat)
+          .FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
 
-    [Authorize(Roles = "Baker")]
-    [HttpPost]
-    public ActionResult Details(FlavorTreat ab)
-    {
-      if (_db.FlavorTreat.FirstOrDefault(a => a.FlavorId == ab.FlavorId && a.TreatId == ab.TreatId) == null)
-      {
-        _db.FlavorTreat.Add(ab);
-        _db.SaveChanges();
-      }
-      return RedirectToAction("Details", new { id = ab.FlavorId });
-    }
-
-    [Authorize(Roles = "Baker")]
     public ActionResult Edit(int id)
     {
-      Flavor flavor = _db.Flavors.FirstOrDefault(a => a.FlavorId == id);
-      ViewBag.PageTitle = $"Edit {flavor.Name}";
-      return View(flavor);
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
 
-    [Authorize(Roles = "Baker")]
     [HttpPost]
     public ActionResult Edit(Flavor flavor)
     {
@@ -85,25 +63,21 @@ namespace PierresTreat.Controllers
       return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
 
-    [Authorize(Roles = "Baker")]
     public ActionResult Delete(int id)
     {
-      Flavor flavor = _db.Flavors.FirstOrDefault(a => a.FlavorId == id);
-      ViewBag.PageTitle = $"Delete {flavor.Name}?";
-      return View(flavor);
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
 
-    [Authorize(Roles = "Baker")]
     [HttpPost, ActionName("Delete")]
     public ActionResult Deleted(int id)
     {
-      Flavor flavor = _db.Flavors.FirstOrDefault(a => a.FlavorId == id);
-      _db.Flavors.Remove(flavor);
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      _db.Flavors.Remove(thisFlavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
-    [Authorize(Roles = "Baker")]
     [HttpPost]
     public ActionResult DeleteFlavor(int flavorTreatId)
     {

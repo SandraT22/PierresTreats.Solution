@@ -4,7 +4,7 @@
 
 @model PierresTreat.Models.Flavor
 
-<h4>Add a new treat</h4>
+<h4>Add a new flavor</h4>
 <hr />
 @using (@Html.BeginForm())
 {
@@ -12,8 +12,8 @@
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name, new { required = "required" })
   </div>
-  <input class="btn btn-dark" type="submit" value="Add Author" />
+  <input class="btn btn-dark" type="submit" value="Add Flavor" />
 }
 <hr />
 
-<p>@Html.ActionLink("Show all treats", "Index")</p>
+<p>@Html.ActionLink("Show all flavors", "Index")</p>

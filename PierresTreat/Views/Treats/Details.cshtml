@@ -8,18 +8,25 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 <h4>Flavors:</h4>
-<ul>
-  @foreach (var join in Model.JoinEntities)
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This item does not belong to any flavors</p>
+}
+else
+{
+  <h4>Flavors the item belongs to:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Flavor.Name
-      @using (Html.BeginForm("DeleteFlavor", "Treats", FormMethod.Post, new { @class = "form-inline" }))
-      {
-        @Html.Hidden("joinId", @join.FlavorTreatId)
-        <input type="submit" value="Delete" class="btn btn-dark" />
-      }
-    </li>
+    <li>@join.Flavor.Name</li>
+    @using (Html.BeginForm("DeleteFlavor", "Items"))
+    {
+      @Html.Hidden("joinId", @join.FlavorTreatId)
+      <input type="submit" value="Delete"/>
+    }
   }
-</ul>
+  </ul>
+}
 <hr />
 
 
