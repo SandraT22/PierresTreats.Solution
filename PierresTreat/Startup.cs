@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Identity;
-
 using PierresTreat.Models;
 
 namespace PierresTreat
@@ -38,6 +37,9 @@ namespace PierresTreat
     public void Configure(IApplicationBuilder app)
     {
       app.UseDeveloperExceptionPage();
+
+      app.UseAuthorization();
+
       app.UseRouting();
 
       app.UseAuthorization();
